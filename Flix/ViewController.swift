@@ -19,15 +19,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         let movie = moviesArray[indexPath.row]
         cell.title.text = movie["title"] as? String ?? ""
         cell.desc.text = movie["overview"] as? String ?? ""
-//        if let ImageUrlString = movie["image_url"] as? String{let imageUrl = URL(string: ImageUrlString)
-//            cell.movieImage.af.setImage(withURL: imageUrl!)
-        
-        
-//        }
         let baseURL = "https://image.tmdb.org/t/p/w185"
         let posterPath = movie["poster_path"] as! String
         let posterURL = URL(string: baseURL+posterPath)
-        print(posterURL)
         cell.movieImage.af.setImage(withURL: posterURL!)
         return cell
     }
@@ -60,7 +54,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     func getAPIData(){
         API.getMovies(){
             (movies) in guard let movies = movies else {return}
-            print(movies)
             self.moviesArray = movies
             self.tableView.reloadData()
         }
